@@ -14,6 +14,7 @@ import UnitStatusesPage from './pages/UnitStatusesPage.jsx'
 import ExtraFeaturesPage from './pages/ExtraFeaturesPage.jsx'
 import BookingTypesPage from './pages/BookingTypesPage.jsx'
 import TourismCompaniesPage from './pages/TourismCompaniesPage.jsx'
+import HotelDataPage from './pages/HotelDataPage.jsx'
 
 function App() {
   const { i18n } = useTranslation()
@@ -38,7 +39,8 @@ function App() {
         <Route path="/settings/extra-features" element={<ExtraFeaturesPage />} />
         <Route path="/settings/booking-types" element={<BookingTypesPage />} />
         <Route path="/tourism" element={<TourismCompaniesPage />} />
-        <Route path="/hotels" element={<HotelsTablePage />} />
+        <Route path="/hotels" element={<HotelDataPage />} />
+        <Route path="/hotels/list" element={<HotelsTablePage />} />
         <Route
           path="/hotels/units-tree"
           element={<SimplePage title={isArabic ? 'شجرة الوحدات' : 'Units Tree'} />}
