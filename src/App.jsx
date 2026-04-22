@@ -7,6 +7,7 @@ import DashboardHome from './components/DashboardHome.jsx'
 import SimplePage from './components/SimplePage.jsx'
 import HotelsTablePage from './components/HotelsTablePage.jsx'
 import CountriesPage from './pages/CountriesPage.jsx'
+import CitiesPage from './pages/CitiesPage.jsx'
 
 function App() {
   const { i18n } = useTranslation()
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<DashboardHome />} />
         <Route path="/settings" element={<SimplePage title={isArabic ? 'الإعدادات' : 'Settings'} />} />
         <Route path="/settings/countries" element={<CountriesPage />} />
+        <Route path="/settings/cities" element={<CitiesPage />} />
         <Route
           path="/tourism"
           element={<SimplePage title={isArabic ? 'شركات السياحة' : 'Tourism Companies'} />}
