@@ -8,6 +8,8 @@ import SimplePage from './components/SimplePage.jsx'
 import HotelsTablePage from './components/HotelsTablePage.jsx'
 import CountriesPage from './pages/CountriesPage.jsx'
 import CitiesPage from './pages/CitiesPage.jsx'
+import NationalitiesPage from './pages/NationalitiesPage.jsx'
+import UnitTitlesPage from './pages/UnitTitlesPage.jsx'
 
 function App() {
   const { i18n } = useTranslation()
@@ -26,6 +28,8 @@ function App() {
         <Route path="/settings" element={<SimplePage title={isArabic ? 'الإعدادات' : 'Settings'} />} />
         <Route path="/settings/countries" element={<CountriesPage />} />
         <Route path="/settings/cities" element={<CitiesPage />} />
+        <Route path="/settings/nationalities" element={<NationalitiesPage />} />
+        <Route path="/settings/unit-titles" element={<UnitTitlesPage />} />
         <Route
           path="/tourism"
           element={<SimplePage title={isArabic ? 'شركات السياحة' : 'Tourism Companies'} />}
