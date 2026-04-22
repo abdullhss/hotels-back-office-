@@ -33,7 +33,18 @@ const navItems = [
     ],
   },
   { key: 'tourism', labelAr: 'شركات السياحة', labelEn: 'Tourism Companies', path: '/tourism', icon: Building2 },
-  { key: 'hotels', labelAr: 'الفنادق', labelEn: 'Hotels', path: '/hotels', icon: Hotel },
+  {
+    key: 'hotels',
+    labelAr: 'الفنادق',
+    labelEn: 'Hotels',
+    path: '/hotels',
+    icon: Hotel,
+    children: [
+      { key: 'hotel-details', labelAr: 'بيانات الفندق', labelEn: 'Hotel Details', path: '/hotels' },
+      { key: 'units-tree', labelAr: 'شجرة الوحدات', labelEn: 'Units Tree', path: '/hotels/units-tree' },
+      { key: 'hotel-services', labelAr: 'الخدمات', labelEn: 'Services', path: '/hotels/services' },
+    ],
+  },
   { key: 'employees', labelAr: 'الموظفين والصلاحيات', labelEn: 'Employees & Roles', path: '/employees', icon: Users },
   { key: 'followup', labelAr: 'المتابعة', labelEn: 'Follow-up', path: '/follow-up', icon: ClipboardList },
 ]

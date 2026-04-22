@@ -40,6 +40,14 @@ function App() {
         <Route path="/tourism" element={<TourismCompaniesPage />} />
         <Route path="/hotels" element={<HotelsTablePage />} />
         <Route
+          path="/hotels/units-tree"
+          element={<SimplePage title={isArabic ? 'شجرة الوحدات' : 'Units Tree'} />}
+        />
+        <Route
+          path="/hotels/services"
+          element={<SimplePage title={isArabic ? 'الخدمات' : 'Services'} />}
+        />
+        <Route
           path="/employees"
           element={<SimplePage title={isArabic ? 'الموظفين والصلاحيات' : 'Employees & Roles'} />}
         />
