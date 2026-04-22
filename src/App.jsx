@@ -13,6 +13,7 @@ import UnitTitlesPage from './pages/UnitTitlesPage.jsx'
 import UnitStatusesPage from './pages/UnitStatusesPage.jsx'
 import ExtraFeaturesPage from './pages/ExtraFeaturesPage.jsx'
 import BookingTypesPage from './pages/BookingTypesPage.jsx'
+import TourismCompaniesPage from './pages/TourismCompaniesPage.jsx'
 
 function App() {
   const { i18n } = useTranslation()
@@ -36,10 +37,7 @@ function App() {
         <Route path="/settings/unit-statuses" element={<UnitStatusesPage />} />
         <Route path="/settings/extra-features" element={<ExtraFeaturesPage />} />
         <Route path="/settings/booking-types" element={<BookingTypesPage />} />
-        <Route
-          path="/tourism"
-          element={<SimplePage title={isArabic ? 'شركات السياحة' : 'Tourism Companies'} />}
-        />
+        <Route path="/tourism" element={<TourismCompaniesPage />} />
         <Route path="/hotels" element={<HotelsTablePage />} />
         <Route
           path="/employees"

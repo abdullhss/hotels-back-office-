@@ -21,7 +21,7 @@ const resources = {
       },
       table: {
         rowsPerPage: 'العرض',
-        searchPlaceholder: 'ابحث هنا...',
+        searchPlaceholder: 'ابحث هنا....',
         searchSubmit: 'عرض البيانات',
         clearSearchAria: 'مسح البحث',
         empty: 'لا توجد بيانات',

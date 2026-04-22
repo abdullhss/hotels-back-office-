@@ -2,7 +2,7 @@ import { useCallback, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import TablePage from '../components/table/TablePage.jsx'
 import AddUnitTitleDialog from '../components/AddUnitTitleDialog.jsx'
-
+import { Plus } from 'lucide-react'
 const UNIT_TITLE_SEEDS = [
   { nameAr: 'غرفة', nameEn: 'ROOM' },
   { nameAr: 'سويت', nameEn: 'SUITE' },
@@ -121,9 +121,10 @@ export default function UnitTitlesPage() {
           <button
             type="button"
             onClick={() => setAddOpen(true)}
-            className="rounded-md bg-brand-primary px-4 py-3 font-medium text-white transition-colors hover:bg-brand-primary-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-brand-primary"
+            className="rounded-md inline-flex items-center gap-2 bg-brand-primary px-4 py-3 font-medium text-white transition-colors hover:bg-brand-primary-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-brand-primary"
           >
-            {isArabic ? '+ إضافة جديد' : '+ Add new'}
+            <Plus className="h-5 w-5 shrink-0" strokeWidth={2} aria-hidden />
+            {isArabic ? 'إضافة جديد' : 'Add new'}
           </button>
         </div>
       </div>
