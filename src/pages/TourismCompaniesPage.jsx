@@ -13,6 +13,15 @@ const INITIAL_COMPANIES = [
     value: 1,
     descAr: 'شركة سياحة عالمية',
     descEn: 'Global travel agency',
+    address: 'القاهرة، مصر — شارع التحرير',
+    phone1: '+20225760000',
+    phone2: '+20225760001',
+    website: 'https://www.expedia.com',
+    email: 'support@expedia.com',
+    facebookUrl: 'https://facebook.com/expedia',
+    whatsapp: '+201234567890',
+    managerName: 'أحمد محمد',
+    managerPhone: '+201098765432',
     isBanned: false,
   },
   {
@@ -22,6 +31,15 @@ const INITIAL_COMPANIES = [
     value: 2,
     descAr: 'منصة حجوزات فنادق وسفر',
     descEn: 'Travel and accommodation booking platform',
+    address: 'أمستردام، هولندا — شارع أوفير',
+    phone1: '+31203707970',
+    phone2: '+31203707971',
+    website: 'https://www.booking.com',
+    email: 'customer.service@booking.com',
+    facebookUrl: 'https://facebook.com/bookingcom',
+    whatsapp: '+31612345678',
+    managerName: 'سارة علي',
+    managerPhone: '+201112223334',
     isBanned: false,
   },
 ]
@@ -50,13 +68,25 @@ function filterRows(rows, search) {
   const lower = q.toLowerCase()
   return rows.filter((r) => {
     const codeStr = r.value != null ? String(r.value) : ''
-    return (
-      (r.nameAr && r.nameAr.includes(q)) ||
-      (r.nameEn && r.nameEn.toLowerCase().includes(lower)) ||
-      (r.descAr && r.descAr.includes(q)) ||
-      (r.descEn && r.descEn.toLowerCase().includes(lower)) ||
-      codeStr.includes(q)
-    )
+    const hay = [
+      r.nameAr,
+      r.nameEn,
+      r.descAr,
+      r.descEn,
+      r.address,
+      r.phone1,
+      r.phone2,
+      r.website,
+      r.email,
+      r.facebookUrl,
+      r.whatsapp,
+      r.managerName,
+      r.managerPhone,
+      codeStr,
+    ]
+      .filter(Boolean)
+      .join(' ')
+    return hay.includes(q) || hay.toLowerCase().includes(lower)
   })
 }
 
