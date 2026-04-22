@@ -40,7 +40,15 @@ const navItems = [
 
 function isParentActive(item, pathname) {
   if (item.path === '/') return pathname === '/'
-  return pathname === item.path || pathname.startsWith(`${item.path}/`)
+  if (item.path && (pathname === item.path || pathname.startsWith(`${item.path}/`))) {
+    return true
+  }
+  if (Array.isArray(item.children) && item.children.length > 0) {
+    return item.children.some(
+      (child) => pathname === child.path || pathname.startsWith(`${child.path}/`)
+    )
+  }
+  return false
 }
 
 function SidebarLeafLink({ item, location, isArabic }) {
@@ -90,22 +98,21 @@ function NavAccordionGroup({ items, location, isArabic }) {
         const parentActive = isParentActive(item, location.pathname)
         return (
           <AccordionItem key={item.key} value={item.key} className="border-0">
-            <AccordionTrigger asChild className="rounded-xl py-0 hover:no-underline">
-              <Link
-                to={item.path}
-                className={cn(
-                  'flex w-full items-center justify-between gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all [&[data-state=open]>svg]:rotate-180',
-                  parentActive
-                    ? 'bg-[#5b56f7] text-white shadow-md data-[state=open]:bg-[#5b56f7]'
-                    : 'text-[#374151] hover:bg-[#eef2ff] hover:text-[#5b56f7]'
-                )}
-              >
-                <span className="flex min-w-0 flex-1 items-center gap-3">
-                  <Icon size={20} strokeWidth={1.75} />
-                  <span>{isArabic ? item.labelAr : item.labelEn}</span>
-                </span>
-                <ChevronDown className="h-4 w-4 shrink-0 text-current transition-transform duration-200" />
-              </Link>
+            <AccordionTrigger
+              type="button"
+              className={cn(
+                'rounded-xl py-3 hover:no-underline',
+                'flex w-full items-center justify-between gap-2 px-4 text-sm font-medium transition-all [&[data-state=open]>svg]:rotate-180',
+                parentActive
+                  ? 'bg-[#5b56f7] text-white shadow-md data-[state=open]:bg-[#5b56f7]'
+                  : 'text-[#374151] hover:bg-[#eef2ff] hover:text-[#5b56f7]'
+              )}
+            >
+              <span className="flex min-w-0 flex-1 items-center gap-3">
+                <Icon size={20} strokeWidth={1.75} />
+                <span>{isArabic ? item.labelAr : item.labelEn}</span>
+              </span>
+              <ChevronDown className="h-4 w-4 shrink-0 text-current transition-transform duration-200" />
             </AccordionTrigger>
             <AccordionContent className="pb-0 pt-0">
               <div className="mt-1 space-y-1 ps-5">
