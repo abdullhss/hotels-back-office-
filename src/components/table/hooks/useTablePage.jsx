@@ -254,27 +254,30 @@ export const useTablePage = ({
     }
 
     return (
-      <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
-        <div dir="ltr" className="flex items-center gap-2">
+      <div className="mt-4 flex flex-col gap-4 border-t border-gray-200 pt-4 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+        <div
+          dir="ltr"
+          className="flex min-w-0 w-full max-w-full items-center justify-center gap-0.5 overflow-x-auto overscroll-x-contain pb-1 [-webkit-overflow-scrolling:touch] sm:w-auto sm:justify-start sm:gap-1 sm:pb-0"
+        >
           <button
             type="button"
             onClick={() => handlePageChange(page - 1)}
             disabled={page <= 1}
-            className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="shrink-0 rounded-md p-2 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <ChevronLeft className="w-5 h-5 text-gray-600" />
+            <ChevronLeft className="h-5 w-5 text-gray-600" />
           </button>
 
           {pageNumbers.map((pageNum, index) => (
             <React.Fragment key={index}>
               {pageNum === '...' ? (
-                <span className="px-2 text-gray-500">...</span>
+                <span className="shrink-0 px-1.5 text-gray-500 sm:px-2">...</span>
               ) : (
                 <button
                   type="button"
                   onClick={() => handlePageChange(pageNum)}
                   className={cn(
-                    'px-3 py-1 rounded-md text-sm transition-colors',
+                    'shrink-0 rounded-md px-2 py-1 text-xs transition-colors sm:px-3 sm:text-sm',
                     page === pageNum ? 'bg-brand-primary text-white' : 'text-gray-700 hover:bg-gray-100'
                   )}
                 >
@@ -288,20 +291,20 @@ export const useTablePage = ({
             type="button"
             onClick={() => handlePageChange(page + 1)}
             disabled={page >= pages}
-            className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="shrink-0 rounded-md p-2 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <ChevronRight className="w-5 h-5 text-gray-600" />
+            <ChevronRight className="h-5 w-5 text-gray-600" />
           </button>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex w-full min-w-0 shrink-0 items-center justify-between gap-2 border-t border-gray-100 pt-3 sm:w-auto sm:justify-end sm:border-0 sm:pt-0">
           <span className="text-sm text-gray-700">{t('table.rowsPerPage')}</span>
           <div className="relative">
             <select
               dir="ltr"
               value={String(rowsPerPage)}
               onChange={(e) => handleRowsPerPageChange(e.target.value)}
-              className="appearance-none bg-white border border-gray-300 rounded-md px-3 py-1.5 rtl:pr-8 ltr:pl-8 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
+              className="appearance-none rounded-md border border-gray-300 bg-white py-1.5 ps-3 pe-8 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
             >
               {pagingOptions.map((option) => (
                 <option key={option} value={option}>
@@ -309,7 +312,7 @@ export const useTablePage = ({
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+            <ChevronDown className="pointer-events-none absolute end-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
           </div>
         </div>
       </div>
@@ -358,13 +361,13 @@ export const useTablePage = ({
     const showSearch = !hideSearch
     if (!showSearch && visibleFilters.length === 0) return null
     return (
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end">
         {showSearch && (
-          <div className="flex flex-col gap-2 flex-1 min-w-[220px]">
-            <div className="flex items-center gap-2">
-              <div className="relative flex-1 flex items-center">
+          <div className="flex min-w-0 w-full flex-1 flex-col gap-2 sm:min-w-[200px]">
+            <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
+              <div className="relative flex min-w-0 flex-1 items-center">
                 {!searchValue && (
-                  <Search className="absolute rtl:left-3 ltr:right-3 w-4 h-4 text-gray-400 pointer-events-none" />
+                  <Search className="pointer-events-none absolute end-3 h-4 w-4 text-gray-400" />
                 )}
                 <input
                   type="text"
@@ -372,27 +375,25 @@ export const useTablePage = ({
                   onChange={(e) => handleSearchChange(e.target.value)}
                   placeholder={t('table.searchPlaceholder')}
                   className={cn(
-                    'w-full bg-white border border-gray-300 rounded-md py-2 text-sm text-gray-700',
-                    'rtl:pl-10 rtl:pr-3 ltr:pr-10 ltr:pl-3',
-                    searchValue && 'rtl:pr-8 ltr:pl-8',
-                    'focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent'
+                    'w-full min-w-0 rounded-md border border-gray-300 bg-white py-2 pe-10 ps-3 text-sm text-gray-700',
+                    'focus:border-transparent focus:outline-none focus:ring-2 focus:ring-brand-primary'
                   )}
                 />
                 {searchValue && (
                   <button
                     type="button"
                     onClick={handleSearchClear}
-                    className="absolute rtl:left-2 ltr:right-2 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-gray-100 text-gray-500"
+                    className="absolute end-2 top-1/2 -translate-y-1/2 rounded p-1 text-gray-500 hover:bg-gray-100"
                     aria-label={t('table.clearSearchAria')}
                   >
-                    <X className="w-4 h-4" />
+                    <X className="h-4 w-4" />
                   </button>
                 )}
               </div>
               <button
                 type="button"
                 onClick={handleSearchTrigger}
-                className="whitespace-nowrap px-3 py-2 bg-brand-primary text-white rounded-md text-sm font-medium hover:bg-brand-primary-hover transition-colors"
+                className="w-full shrink-0 rounded-md bg-brand-primary px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-primary-hover sm:w-auto"
               >
                 {t('table.searchSubmit')}
               </button>
@@ -410,7 +411,10 @@ export const useTablePage = ({
           ]
           const currentValue = filterState[filter.key] ?? '-1'
           return (
-            <div key={filter.key ?? index} className="flex flex-col gap-2 flex-1 min-w-[160px] max-w-[250px]">
+            <div
+              key={filter.key ?? index}
+              className="flex min-w-0 w-full max-w-full flex-1 flex-col gap-2 sm:min-w-[160px] sm:max-w-[250px]"
+            >
               {filter.label && (
                 <label className="text-sm font-medium text-gray-700 whitespace-nowrap">{filter.label}</label>
               )}
@@ -419,7 +423,7 @@ export const useTablePage = ({
                   value={currentValue}
                   disabled={filter.loading}
                   onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-                  className="appearance-none w-full bg-white border border-gray-300 rounded-md px-3 py-2 rtl:pl-8 ltr:pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary disabled:opacity-50 text-gray-700"
+                  className="w-full appearance-none rounded-md border border-gray-300 bg-white py-2 ps-3 pe-8 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-primary disabled:opacity-50"
                 >
                   {filterOptions.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -427,7 +431,7 @@ export const useTablePage = ({
                     </option>
                   ))}
                 </select>
-                <ChevronDown className="absolute rtl:left-2 ltr:right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+                <ChevronDown className="pointer-events-none absolute end-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
               </div>
             </div>
           )

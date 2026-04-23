@@ -188,7 +188,7 @@ export default function EmployeesPage() {
   )
 
   return (
-    <div className="space-y-4">
+    <div className="min-w-0 space-y-4">
       <AddEmployeeDialog
         open={addOpen}
         onOpenChange={setAddOpen}
@@ -196,13 +196,15 @@ export default function EmployeesPage() {
         isArabic={isArabic}
       />
 
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-gray-800">{isArabic ? 'الموظفين' : 'Employees'}</h1>
-        <div className="flex flex-wrap items-center gap-2 ms-auto">
+      <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+        <h1 className="min-w-0 text-xl font-bold text-gray-800 sm:text-2xl">
+          {isArabic ? 'الموظفين' : 'Employees'}
+        </h1>
+        <div className="flex w-full flex-wrap items-center gap-2 sm:ms-auto sm:w-auto">
           <button
             type="button"
             onClick={() => setAddOpen(true)}
-            className="inline-flex items-center gap-2 rounded-md bg-brand-primary px-4 py-3 font-medium text-white transition-colors hover:bg-brand-primary-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-brand-primary"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand-primary px-4 py-3 font-medium text-white transition-colors hover:bg-brand-primary-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-brand-primary sm:w-auto"
           >
             <Plus className="h-5 w-5 shrink-0" strokeWidth={2} aria-hidden />
             {isArabic ? 'إضافة جديد' : 'Add new'}

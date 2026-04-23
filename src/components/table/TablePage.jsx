@@ -14,7 +14,8 @@ export const TableEmptyLogo = () => (
   </div>
 )
 
-const panelClass = 'rounded-2xl border border-[#e2e8f0] bg-white p-4 shadow-sm'
+const panelClass =
+  'min-w-0 max-w-full rounded-2xl border border-[#e2e8f0] bg-white p-3 shadow-sm sm:p-4'
 
 /**
  * @param {Array} filters - Optional. Array of filter configs: { key: string, label?: string, allLabel?: string, options: { label, value }[], hide?: boolean, loading?: boolean }
@@ -72,8 +73,8 @@ export default function TablePage({
 
   const dataTable = (
     <>
-      <div className="overflow-x-auto">
-        <Table className="border-0 [&>table]:border-0">
+      <div className="min-w-0 max-w-full overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
+        <Table className="min-w-max border-0">
           <TableHeader
             className={cn(isHeaderSticky && 'sticky top-0 bg-gray-50 z-10', '[&_tr]:border-b-0')}
           >
@@ -98,7 +99,7 @@ export default function TablePage({
                       column.uid === 'medicationTime'
                       ? 'cursor-default'
                       : 'cursor-pointer',
-                    'px-4 py-3 text-sm font-semibold text-gray-700 select-none',
+                    'px-2 py-2 text-xs font-semibold text-gray-700 select-none sm:px-4 sm:py-3 sm:text-sm',
                     sortDescriptor.column === column.uid && 'font-bold'
                   )}
                   onClick={() => {
@@ -172,7 +173,7 @@ export default function TablePage({
                       specialRowClassName?.(item)
                     )}
                   >
-                    {columns.map((column, index) => (
+                    {columns.map((column) => (
                       <TableCell
                         key={column.uid}
                         className={cn(
@@ -183,9 +184,7 @@ export default function TablePage({
                             column.uid === 'medicationTime'
                             ? 'text-center'
                             : 'text-start',
-                          'px-4 py-3 text-sm text-gray-700',
-                          index === 0 && 'rtl:pr-4 ltr:pl-4',
-                          index === columns.length - 1 && 'rtl:pl-4 ltr:pr-4'
+                          'px-2 py-2 text-xs text-gray-700 sm:px-4 sm:py-3 sm:text-sm'
                         )}
                       >
                         {column.uid === 'actions' ? (
@@ -224,17 +223,17 @@ export default function TablePage({
   )
 
   return (
-    <div className="space-y-4">
+    <div className="min-w-0 space-y-4">
       {(tableTitle || AddButtonProps || exportExcelProps.display) && (
-        <div className="flex flex-wrap justify-between items-center gap-3">
+        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           {tableTitle && <h1 className="text-2xl font-bold text-gray-800">{tableTitle}</h1>}
-          <div className="flex flex-wrap items-center gap-2 ms-auto">
+          <div className="flex w-full flex-wrap items-center gap-2 sm:ms-auto sm:w-auto">
             {exportExcelProps.display && (
               <button
                 type="button"
                 onClick={exportExcelProps.onClick}
                 disabled={exportExcelProps.loading}
-                className="flex items-center gap-2 bg-transparent border border-brand-primary text-brand-primary py-2 px-4 rounded-md font-medium hover:bg-brand-primary/10 transition-colors whitespace-nowrap disabled:opacity-50"
+                className="flex w-full items-center justify-center gap-2 rounded-md border border-brand-primary bg-transparent px-4 py-2 font-medium text-brand-primary transition-colors hover:bg-brand-primary/10 disabled:opacity-50 sm:w-auto sm:justify-start"
               >
                 <span>{t('table.exportExcel')}</span>
                 {exportExcelProps.loading ? (
@@ -254,7 +253,7 @@ export default function TablePage({
                 type="button"
                 onClick={AddButtonProps.onClick}
                 disabled={AddButtonProps.disabled}
-                className="bg-brand-primary text-white py-3 px-4 rounded-md font-medium hover:bg-brand-primary-hover transition-colors disabled:opacity-50 disabled:hover:bg-brand-primary"
+                className="w-full rounded-md bg-brand-primary px-4 py-3 font-medium text-white transition-colors hover:bg-brand-primary-hover disabled:opacity-50 disabled:hover:bg-brand-primary sm:w-auto"
               >
                 {AddButtonProps.title}
               </button>
