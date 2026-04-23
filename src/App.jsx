@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { Toaster } from 'sonner'
 import Login from './components/Login.jsx'
 import AppLayout from './components/AppLayout.jsx'
 import DashboardHome from './components/DashboardHome.jsx'
@@ -15,6 +16,12 @@ import ExtraFeaturesPage from './pages/ExtraFeaturesPage.jsx'
 import BookingTypesPage from './pages/BookingTypesPage.jsx'
 import TourismCompaniesPage from './pages/TourismCompaniesPage.jsx'
 import HotelDataPage from './pages/HotelDataPage.jsx'
+import UnitsTreePage from './pages/UnitsTreePage.jsx'
+import ServicesPage from './pages/ServicesPage.jsx'
+import DepartmentsPage from './pages/DepartmentsPage.jsx'
+import EmployeesPage from './pages/EmployeesPage.jsx'
+import PermissionGroupsPage from './pages/PermissionGroupsPage.jsx'
+import BookingFollowUpPage from './pages/BookingFollowUpPage.jsx'
 
 function App() {
   const { i18n } = useTranslation()
@@ -26,7 +33,8 @@ function App() {
   }, [i18n.language, isArabic])
 
   return (
-    <Routes>
+    <>
+      <Routes>
       <Route path="/login" element={<Login />} />
       <Route element={<AppLayout />}>
         <Route path="/" element={<DashboardHome />} />
@@ -41,22 +49,21 @@ function App() {
         <Route path="/tourism" element={<TourismCompaniesPage />} />
         <Route path="/hotels" element={<HotelDataPage />} />
         <Route path="/hotels/list" element={<HotelsTablePage />} />
+        <Route path="/hotels/units-tree" element={<UnitsTreePage />} />
+        <Route path="/hotels/services" element={<ServicesPage />} />
+        <Route path="/employees" element={<DepartmentsPage />} />
+        <Route path="/employees/staff" element={<EmployeesPage />} />
+        <Route path="/employees/permission-groups" element={<PermissionGroupsPage />} />
+        <Route path="/follow-up" element={<BookingFollowUpPage />} />
         <Route
-          path="/hotels/units-tree"
-          element={<SimplePage title={isArabic ? 'شجرة الوحدات' : 'Units Tree'} />}
+          path="/follow-up/rooms"
+          element={<SimplePage title={isArabic ? 'متابعة الغرف' : 'Room Follow-up'} />}
         />
-        <Route
-          path="/hotels/services"
-          element={<SimplePage title={isArabic ? 'الخدمات' : 'Services'} />}
-        />
-        <Route
-          path="/employees"
-          element={<SimplePage title={isArabic ? 'الموظفين والصلاحيات' : 'Employees & Roles'} />}
-        />
-        <Route path="/follow-up" element={<SimplePage title={isArabic ? 'المتابعة' : 'Follow-up'} />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+      </Routes>
+      <Toaster richColors position="top-center" dir={isArabic ? 'rtl' : 'ltr'} />
+    </>
   )
 }
 

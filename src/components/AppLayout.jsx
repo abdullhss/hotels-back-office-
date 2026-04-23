@@ -45,8 +45,44 @@ const navItems = [
       { key: 'hotel-services', labelAr: 'الخدمات', labelEn: 'Services', path: '/hotels/services' },
     ],
   },
-  { key: 'employees', labelAr: 'الموظفين والصلاحيات', labelEn: 'Employees & Roles', path: '/employees', icon: Users },
-  { key: 'followup', labelAr: 'المتابعة', labelEn: 'Follow-up', path: '/follow-up', icon: ClipboardList },
+  {
+    key: 'employees',
+    labelAr: 'الموظفين والصلاحيات',
+    labelEn: 'Employees & Roles',
+    path: '/employees',
+    icon: Users,
+    children: [
+      { key: 'departments', labelAr: 'الاقسام', labelEn: 'Departments', path: '/employees' },
+      { key: 'staff', labelAr: 'الموظفين', labelEn: 'Employees', path: '/employees/staff' },
+      {
+        key: 'permission-groups',
+        labelAr: 'مجموعات الصلاحيات',
+        labelEn: 'Permission Groups',
+        path: '/employees/permission-groups',
+      },
+    ],
+  },
+  {
+    key: 'followup',
+    labelAr: 'المتابعة',
+    labelEn: 'Follow-up',
+    path: '/follow-up',
+    icon: ClipboardList,
+    children: [
+      {
+        key: 'follow-bookings',
+        labelAr: 'متابعة الحجوزات',
+        labelEn: 'Booking Follow-up',
+        path: '/follow-up',
+      },
+      {
+        key: 'follow-rooms',
+        labelAr: 'متابعة الغرف',
+        labelEn: 'Room Follow-up',
+        path: '/follow-up/rooms',
+      },
+    ],
+  },
 ]
 
 function isParentActive(item, pathname) {
@@ -155,31 +191,20 @@ function NavAccordionGroup({ items, location, isArabic }) {
 
 function buildSidebarNav(navItems, location, isArabic) {
   const nodes = []
-  let bucket = []
-
-  const flushBucket = () => {
-    if (bucket.length === 0) return
-    const key = bucket.map((i) => i.key).join('|')
-    nodes.push(
-      <NavAccordionGroup
-        key={`accordion-${key}`}
-        items={bucket}
-        location={location}
-        isArabic={isArabic}
-      />
-    )
-    bucket = []
-  }
-
   for (const item of navItems) {
     if (Array.isArray(item.children) && item.children.length > 0) {
-      bucket.push(item)
+      nodes.push(
+        <NavAccordionGroup
+          key={item.key}
+          items={[item]}
+          location={location}
+          isArabic={isArabic}
+        />
+      )
     } else {
-      flushBucket()
       nodes.push(<SidebarLeafLink key={item.key} item={item} location={location} isArabic={isArabic} />)
     }
   }
-  flushBucket()
   return nodes
 }
 

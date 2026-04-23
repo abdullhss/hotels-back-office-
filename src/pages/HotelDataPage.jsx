@@ -70,7 +70,7 @@ export default function HotelDataPage() {
         ? {
             pageTitle: 'الفندق',
             pageSubtitle: 'عرض بيانات الفندق وإدارة المميزات والصور',
-            addPhotos: '+ إضافة صور',
+            addPhotos: 'إضافة صور',
             addPhotosSoon: 'قريباً',
             active: 'نشط',
             descriptionHeading: 'الوصف',
@@ -88,7 +88,7 @@ export default function HotelDataPage() {
         : {
             pageTitle: 'The hotel',
             pageSubtitle: 'View hotel details and manage features and photos',
-            addPhotos: '+ Add photos',
+            addPhotos: 'Add photos',
             addPhotosSoon: 'Coming soon',
             active: 'Active',
             descriptionHeading: 'Description',
