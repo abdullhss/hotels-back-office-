@@ -22,6 +22,7 @@ import DepartmentsPage from './pages/DepartmentsPage.jsx'
 import EmployeesPage from './pages/EmployeesPage.jsx'
 import PermissionGroupsPage from './pages/PermissionGroupsPage.jsx'
 import BookingFollowUpPage from './pages/BookingFollowUpPage.jsx'
+import RoomFollowUpPage from './pages/RoomFollowUpPage.jsx'
 
 function App() {
   const { i18n } = useTranslation()
@@ -55,10 +56,7 @@ function App() {
         <Route path="/employees/staff" element={<EmployeesPage />} />
         <Route path="/employees/permission-groups" element={<PermissionGroupsPage />} />
         <Route path="/follow-up" element={<BookingFollowUpPage />} />
-        <Route
-          path="/follow-up/rooms"
-          element={<SimplePage title={isArabic ? 'متابعة الغرف' : 'Room Follow-up'} />}
-        />
+        <Route path="/follow-up/rooms" element={<RoomFollowUpPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
