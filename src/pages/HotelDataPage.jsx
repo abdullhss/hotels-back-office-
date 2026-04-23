@@ -137,17 +137,13 @@ export default function HotelDataPage() {
       </div>
 
       {/* Gallery */}
-      <section className="rounded-2xl border border-[#e2e8f0] bg-white p-4 shadow-sm">
+      <section className="rounded-2xl border border-[#e2e8f0] bg-white p-4 shadow-sm max-h-[50vh] overflow-y-auto">
         <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_280px]">
-          <div className="relative min-h-[220px] overflow-hidden rounded-xl bg-gray-100 md:min-h-[280px]">
-            <img
-              src={GALLERY_MAIN}
-              alt=""
-              className="h-full w-full object-cover"
-            />
+          <div className="relative overflow-hidden rounded-xl bg-gray-100 max-h-[45vh]">
+            <img src={GALLERY_MAIN} alt="" className="max-h-[45vh] w-full object-cover" />
           </div>
           <div className="grid grid-cols-2 gap-3">
-            {GALLERY_SMALL.map((src, i) => (
+            {GALLERY_SMALL.map((src) => (
               <div key={src} className="aspect-square overflow-hidden rounded-xl bg-gray-100">
                 <img src={src} alt="" className="h-full w-full object-cover" />
               </div>
