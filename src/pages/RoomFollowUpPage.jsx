@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '../lib/utils'
+import UpdateRoomStatusDialog from '../components/UpdateRoomStatusDialog.jsx'
 
 const STATUS_ORDER = ['available', 'occupied', 'reserved', 'cleaning', 'maintenance']
 
@@ -53,11 +54,6 @@ function formatLy(amount) {
   const n = Number(amount)
   if (Number.isNaN(n)) return `${amount} د.ل`
   return `${n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} د.ل`
-}
-
-function nextStatus(current) {
-  const i = STATUS_ORDER.indexOf(current)
-  return STATUS_ORDER[(i + 1) % STATUS_ORDER.length]
 }
 
 const SEED_ROOMS = [
@@ -219,6 +215,7 @@ export default function RoomFollowUpPage() {
 
   const [rooms, setRooms] = useState(() => SEED_ROOMS.map((r) => ({ ...r })))
   const [query, setQuery] = useState('')
+  const [statusDialogRoom, setStatusDialogRoom] = useState(null)
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -238,11 +235,10 @@ export default function RoomFollowUpPage() {
 
   const statusLabel = useCallback((s) => copy.statusNames[s] ?? s, [copy])
 
-  const handleCycleStatus = useCallback(
-    (room) => {
-      const ns = nextStatus(room.status)
-      setRooms((prev) => prev.map((x) => (x.id === room.id ? { ...x, status: ns } : x)))
-      toast.success(copy.toastStatus(room.number, statusLabel(ns)))
+  const handleConfirmStatus = useCallback(
+    (room, newStatus) => {
+      setRooms((prev) => prev.map((x) => (x.id === room.id ? { ...x, status: newStatus } : x)))
+      toast.success(copy.toastStatus(room.number, statusLabel(newStatus)))
     },
     [copy, statusLabel]
   )
@@ -275,6 +271,15 @@ export default function RoomFollowUpPage() {
 
   return (
     <div className="space-y-6">
+      <UpdateRoomStatusDialog
+        open={Boolean(statusDialogRoom)}
+        onOpenChange={(next) => {
+          if (!next) setStatusDialogRoom(null)
+        }}
+        room={statusDialogRoom}
+        isArabic={isArabic}
+        onConfirm={handleConfirmStatus}
+      />
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-gray-900">{copy.title}</h1>
@@ -382,7 +387,7 @@ export default function RoomFollowUpPage() {
                   <button
                     type="button"
                     title={copy.changeStatus}
-                    onClick={() => handleCycleStatus(room)}
+                    onClick={() => setStatusDialogRoom(room)}
                     className={cn(
                       'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-orange-200 bg-orange-50 text-orange-600',
                       'transition hover:bg-orange-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400'
